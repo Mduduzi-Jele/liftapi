@@ -14,7 +14,7 @@ app.use(cookieParser());
 app.use(
   cors({
     credentials: true,
-    origin: "https://lift.onrender.com/",
+    origin: "https://lift.onrender.com",
   })
 );
 
