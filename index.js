@@ -18,6 +18,15 @@ app.use(
   })
 );
 
+const connection = mysql.createPool({
+  host: process.env.HOST,
+  user: process.env.USER,
+  password: process.env.PASSWORD,
+  database: process.env.DATABASE,
+  waitForConnections: true,
+  connectionLimit: 30,
+});
+
 app.use(bodyParser.json());
 
 function verifyToken(req, res, next) {
@@ -37,6 +46,7 @@ function verifyToken(req, res, next) {
           if (!data.length == 1) {
             res.status(404).send("No user found");
           } else {
+            connection.
             next();
           }
         }
@@ -223,18 +233,6 @@ app.get("/image/:name", verifyToken, (req, res) => {
       }
     }
   });
-});
-
-const connection = mysql.createConnection({
-  host: process.env.HOST,
-  user: process.env.USER,
-  password: process.env.PASSWORD,
-  database: process.env.DATABASE,
-});
-
-connection.connect((err) => {
-  if (err) throw err;
-  console.log("Connected");
 });
 
 app.listen(3001, () => {
