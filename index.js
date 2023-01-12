@@ -91,7 +91,7 @@ app.post("/login", (req, res) => {
               .cookie("access_token", token, {
                 httpOnly: true,
               })
-              .send({ auth: true, id: user[0].user_id });
+              .send({ auth: true, id: user[0].user_id }, token);
           }
         } else {
           res.status(404).send({ msg: "Invalid email or password" });
