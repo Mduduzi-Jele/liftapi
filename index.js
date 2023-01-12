@@ -57,6 +57,7 @@ function verifyToken(req, res, next) {
 
 app.post("/login", (req, res) => {
   const { email, password } = req.body;
+  console.log(email, password)
   email.toString();
   password.toString();
   if (
