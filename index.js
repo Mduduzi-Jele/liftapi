@@ -67,6 +67,7 @@ app.post("/login", (req, res) => {
     connection.query(
       `SELECT * FROM user WHERE email = '${email}'`,
       (err, user) => {
+        console.log(user)
         if (err) throw err;
         if (user.length === 1) {
           const passwordIsValid = bcrypt.compareSync(
@@ -85,6 +86,7 @@ app.post("/login", (req, res) => {
                 expiresIn: 86400, // expires in 24 hours
               }
             );
+            console.log(token)
             res
               .cookie("access_token", token, {
                 httpOnly: true,
